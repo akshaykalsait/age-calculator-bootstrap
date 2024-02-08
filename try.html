@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Age Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 20px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    input {
+      padding: 5px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #result {
+      font-size: 18px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Age Calculator</h1>
+
+  <label for="dob">Enter your date of birth:</label>
+  <input type="date" id="dob">
+
+  <button onclick="calculateAge()">Calculate Age</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateAge() {
+      // Get the input value (date of birth)
+      const dobInput = document.getElementById('dob');
+      const dob = dobInput.value;
+
+      // Calculate age
+      const birthDate = new Date(dob);
+      const currentDate = new Date();
+      const age = currentDate.getFullYear() - birthDate.getFullYear();
+
+      // Check if the birthday has occurred this year
+      const hasBirthdayOccurred = (
+        currentDate.getMonth() > birthDate.getMonth() ||
+        (currentDate.getMonth() === birthDate.getMonth() && currentDate.getDate() >= birthDate.getDate())
+      );
+
+      // Adjust age if the birthday hasn't occurred yet this year
+      const finalAge = hasBirthdayOccurred ? age : age - 1;
+
+      // Display the result
+      const resultElement = document.getElementById('result');
+      resultElement.innerHTML = `Your age is: ${finalAge} years old.`;
+    }
+  </script>
+
+</body>
+</html>
